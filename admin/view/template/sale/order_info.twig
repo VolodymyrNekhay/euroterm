@@ -128,14 +128,14 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <td style="width: 50%;" class="text-left">{{ text_payment_address }}</td>
+              <!--<td style="width: 50%;" class="text-left">{{ text_payment_address }}</td>-->
               {% if shipping_method %}
-              <td style="width: 50%;" class="text-left">{{ text_shipping_address }}</td>
+              <td style="width: 100%;" class="text-left">{{ text_shipping_address }}</td>
               {% endif %} </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="text-left">{{ payment_address }}</td>
+              <!--<td class="text-left">{{ payment_address }}</td>-->
               {% if shipping_method %}
               <td class="text-left">{{ shipping_address }}</td>
               {% endif %} </tr>

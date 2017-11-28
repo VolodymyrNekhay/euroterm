@@ -149,6 +149,7 @@ class ControllerStartupStartup extends Controller {
 			$code = $this->config->get('config_currency');
 		}
 		
+		$code = 'UAH'; //8-custom-code: we use UAH only, to make sure that we have UAH just always
 		if (!isset($this->session->data['currency']) || $this->session->data['currency'] != $code) {
 			$this->session->data['currency'] = $code;
 		}

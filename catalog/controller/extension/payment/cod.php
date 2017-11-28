@@ -1,6 +1,9 @@
 <?php
 class ControllerExtensionPaymentCod extends Controller {
 	public function index() {
+		//8-custom-code		
+		$this->load->language('extension/payment/cod');
+       
 		return $this->load->view('extension/payment/cod');
 	}
 

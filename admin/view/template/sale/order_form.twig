@@ -21,9 +21,8 @@
           <ul id="order" class="nav nav-tabs nav-justified">
             <li class="disabled active"><a href="#tab-customer" data-toggle="tab">1. {{ tab_customer }}</a></li>
             <li class="disabled"><a href="#tab-cart" data-toggle="tab">2. {{ tab_product }}</a></li>
-            <li class="disabled"><a href="#tab-payment" data-toggle="tab">3. {{ tab_payment }}</a></li>
-            <li class="disabled"><a href="#tab-shipping" data-toggle="tab">4. {{ tab_shipping }}</a></li>
-            <li class="disabled"><a href="#tab-total" data-toggle="tab">5. {{ tab_total }}</a></li>
+            <li class="disabled"><a href="#tab-shipping" data-toggle="tab">3. {{ tab_shipping }}</a></li>
+            <li class="disabled"><a href="#tab-total" data-toggle="tab">4. {{ tab_total }}</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-customer">
@@ -393,6 +392,7 @@
                 </div>
               </div>
             </div>
+            <!--
             <div class="tab-pane" id="tab-payment">
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-payment-address">{{ entry_address }}</label>
@@ -604,46 +604,12 @@
                 </div>
               </div>
             </div>
+            -->
             <div class="tab-pane" id="tab-shipping">
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-shipping-address">{{ entry_address }}</label>
-                <div class="col-sm-10">
-                  <select name="shipping_address" id="input-shipping-address" class="form-control">
-                    <option value="0" selected="selected">{{ text_none }}</option>
-                    {% for address in addresses %}
-                    <option value="{{ address.address_id }}">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}, {{ address.city }}, {{ address.country }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-shipping-firstname">{{ entry_firstname }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="firstname" value="{{ shipping_firstname }}" id="input-shipping-firstname" class="form-control" />
-                </div>
-              </div>
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-shipping-lastname">{{ entry_lastname }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="lastname" value="{{ shipping_lastname }}" id="input-shipping-lastname" class="form-control" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-shipping-company">{{ entry_company }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="company" value="{{ shipping_company }}" id="input-shipping-company" class="form-control" />
-                </div>
-              </div>
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-shipping-address-1">{{ entry_address_1 }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="address_1" value="{{ shipping_address_1 }}" id="input-shipping-address-1" class="form-control" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-shipping-address-2">{{ entry_address_2 }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="address_2" value="{{ shipping_address_2 }}" id="input-shipping-address-2" class="form-control" />
                 </div>
               </div>
               <div class="form-group required">
@@ -808,7 +774,7 @@
               {% endfor %}
               <div class="row">
                 <div class="col-sm-6 text-left">
-                  <button type="button" onclick="$('a[href=\'#tab-payment\']').tab('show');" class="btn btn-default"><i class="fa fa-arrow-left"></i> {{ button_back }}</button>
+                  <button type="button" onclick="$('a[href=\'#tab-cart\']').tab('show');" class="btn btn-default"><i class="fa fa-arrow-left"></i> {{ button_back }}</button>
                 </div>
                 <div class="col-sm-6 text-right">
                   <button type="button" id="button-shipping-address" data-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fa fa-arrow-right"></i> {{ button_continue }}</button>
@@ -867,36 +833,6 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-coupon">{{ entry_coupon }}</label>
-                  <div class="col-sm-10">
-                    <div class="input-group">
-                      <input type="text" name="coupon" value="{{ coupon }}" id="input-coupon" class="form-control" />
-                      <span class="input-group-btn">
-                      <button type="button" id="button-coupon" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_apply }}</button>
-                      </span></div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-voucher">{{ entry_voucher }}</label>
-                  <div class="col-sm-10">
-                    <div class="input-group">
-                      <input type="text" name="voucher" value="{{ voucher }}" id="input-voucher" data-loading-text="{{ text_loading }}" class="form-control" />
-                      <span class="input-group-btn">
-                      <button type="button" id="button-voucher" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_apply }}</button>
-                      </span></div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-reward">{{ entry_reward }}</label>
-                  <div class="col-sm-10">
-                    <div class="input-group">
-                      <input type="text" name="reward" value="{{ reward }}" id="input-reward" data-loading-text="{{ text_loading }}" class="form-control" />
-                      <span class="input-group-btn">
-                      <button type="button" id="button-reward" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_apply }}</button>
-                      </span></div>
-                  </div>
-                </div>
-                <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-order-status">{{ entry_order_status }}</label>
                   <div class="col-sm-10">
                     <select name="order_status_id" id="input-order-status" class="form-control">
@@ -915,13 +851,6 @@
                   <label class="col-sm-2 control-label" for="input-comment">{{ entry_comment }}</label>
                   <div class="col-sm-10">
                     <textarea name="comment" rows="5" id="input-comment" class="form-control">{{ comment }}</textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-affiliate">{{ entry_affiliate }}</label>
-                  <div class="col-sm-10">
-                    <input type="text" name="affiliate" value="{{ affiliate }}" id="input-affiliate" class="form-control" />
-                    <input type="hidden" name="affiliate_id" value="{{ affiliate_id }}" />
                   </div>
                 </div>
               </fieldset>
@@ -1556,7 +1485,10 @@ $('#cart').delegate('.btn-primary', 'click', function() {
 });
 
 $('#button-cart').on('click', function() {
-	$('a[href=\'#tab-payment\']').tab('show');
+    //old
+    //$('a[href=\'#tab-payment\']').tab('show');
+    //new
+	$('a[href=\'#tab-shipping\']').tab('show');
 });
 
 // Payment Address
@@ -1655,6 +1587,7 @@ $('#tab-payment select[name=\'country_id\']').on('change', function() {
 
 $('#tab-payment select[name=\'country_id\']').trigger('change');
 
+/*
 $('#button-payment-address').on('click', function() {
 	$.ajax({
 		url: '{{ catalog }}index.php?route=api/payment/address&api_token={{ api_token }}&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
@@ -1742,6 +1675,7 @@ $('#button-payment-address').on('click', function() {
 		}
 	});
 });
+*/
 
 // Shipping Address
 $('select[name=\'shipping_address\']').on('change', function() {
@@ -1889,6 +1823,7 @@ $('#button-shipping-address').on('click', function() {
 						if (json['error']) {
 							$('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 						} else {
+						  //SHIPPING METHODS LIST
 							// Shipping Methods
 							html = '<option value="">{{ text_select }}</option>';
 
@@ -1913,6 +1848,43 @@ $('#button-shipping-address').on('click', function() {
 							}
 
 							$('select[name=\'shipping_method\']').html(html);
+                            
+							$.ajax({
+            					url: '{{ catalog }}index.php?route=api/payment/methodscustom&api_token={{ api_token }}&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
+            					dataType: 'json',
+            					crossDomain: true,
+            					beforeSend: function() {
+            						//$('#button-payment-address').button('loading');
+            					},
+            					complete: function() {
+            						//$('#button-payment-address').button('reset');
+            					},
+            					success: function(json) {
+            					  
+            						if (json['error']) {
+            							$('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            						} else {
+            							html = '<option value="">{{ text_select }}</option>';
+            
+            							if (json['payment_methods']) {
+            								for (i in json['payment_methods']) {
+            									if (json['payment_methods'][i]['code'] == $('select[name=\'payment_method\'] option:selected').val()) {
+            										html += '<option value="' + json['payment_methods'][i]['code'] + '" selected="selected">' + json['payment_methods'][i]['title'] + '</option>';
+            									} else {
+            										html += '<option value="' + json['payment_methods'][i]['code'] + '">' + json['payment_methods'][i]['title'] + '</option>';
+            									}
+            								}
+            							}
+            
+            							$('select[name=\'payment_method\']').html(html);
+            						}
+            					},
+            					error: function(xhr, ajaxOptions, thrownError) {
+            						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            					}
+            				}).done(function() {
+
+                            });
 						}
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
@@ -1973,7 +1945,7 @@ $('#button-shipping-method').on('click', function() {
 // Payment Method
 $('#button-payment-method').on('click', function() {
 	$.ajax({
-		url: '{{ catalog }}index.php?route=api/payment/method&api_token={{ api_token }}&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
+		url: '{{ catalog }}index.php?route=api/payment/methodcustom&api_token={{ api_token }}&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
 		type: 'post',
 		data: 'payment_method=' + $('select[name=\'payment_method\'] option:selected').val(),
 		dataType: 'json',

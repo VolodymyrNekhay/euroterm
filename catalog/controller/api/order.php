@@ -15,7 +15,8 @@ class ControllerApiOrder extends Controller {
 
 			// Payment Address
 			if (!isset($this->session->data['payment_address'])) {
-				$json['error'] = $this->language->get('error_payment_address');
+				//8-custom-code
+				//$json['error'] = $this->language->get('error_payment_address');
 			}
 
 			// Payment Method
@@ -113,20 +114,20 @@ class ControllerApiOrder extends Controller {
 				$order_data['telephone'] = $this->session->data['customer']['telephone'];
 				$order_data['custom_field'] = $this->session->data['customer']['custom_field'];
 
-				// Payment Details
-				$order_data['payment_firstname'] = $this->session->data['payment_address']['firstname'];
-				$order_data['payment_lastname'] = $this->session->data['payment_address']['lastname'];
-				$order_data['payment_company'] = $this->session->data['payment_address']['company'];
-				$order_data['payment_address_1'] = $this->session->data['payment_address']['address_1'];
-				$order_data['payment_address_2'] = $this->session->data['payment_address']['address_2'];
-				$order_data['payment_city'] = $this->session->data['payment_address']['city'];
-				$order_data['payment_postcode'] = $this->session->data['payment_address']['postcode'];
-				$order_data['payment_zone'] = $this->session->data['payment_address']['zone'];
-				$order_data['payment_zone_id'] = $this->session->data['payment_address']['zone_id'];
-				$order_data['payment_country'] = $this->session->data['payment_address']['country'];
-				$order_data['payment_country_id'] = $this->session->data['payment_address']['country_id'];
-				$order_data['payment_address_format'] = $this->session->data['payment_address']['address_format'];
-				$order_data['payment_custom_field'] = (isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : array());
+				// Payment Details //8-custom-code
+				$order_data['payment_firstname'] = $this->session->data['customer']['firstname'];//$this->session->data['payment_address']['firstname'];
+				$order_data['payment_lastname'] = $this->session->data['customer']['lastname'];//$this->session->data['payment_address']['lastname'];
+				$order_data['payment_company'] = '';//$this->session->data['payment_address']['company'];
+				$order_data['payment_address_1'] = '';//$this->session->data['payment_address']['address_1'];
+				$order_data['payment_address_2'] = '';//$this->session->data['payment_address']['address_2'];
+				$order_data['payment_city'] = '';//$this->session->data['payment_address']['city'];
+				$order_data['payment_postcode'] = '';//$this->session->data['payment_address']['postcode'];
+				$order_data['payment_zone'] = '';//$this->session->data['payment_address']['zone'];
+				$order_data['payment_zone_id'] = 0;//$this->session->data['payment_address']['zone_id'];
+				$order_data['payment_country'] = $this->session->data['shipping_address']['country'];//$this->session->data['payment_address']['country'];
+				$order_data['payment_country_id'] = $this->session->data['shipping_address']['country_id'];//$this->session->data['payment_address']['country_id'];
+				$order_data['payment_address_format'] = '';//$this->session->data['payment_address']['address_format'];
+				$order_data['payment_custom_field'] = array();//(isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : array());
 
 				if (isset($this->session->data['payment_method']['title'])) {
 					$order_data['payment_method'] = $this->session->data['payment_method']['title'];
@@ -386,7 +387,8 @@ class ControllerApiOrder extends Controller {
 
 				// Payment Address
 				if (!isset($this->session->data['payment_address'])) {
-					$json['error'] = $this->language->get('error_payment_address');
+					//8-custom-code
+					//$json['error'] = $this->language->get('error_payment_address');
 				}
 
 				// Payment Method
@@ -483,20 +485,20 @@ class ControllerApiOrder extends Controller {
 					$order_data['telephone'] = $this->session->data['customer']['telephone'];
 					$order_data['custom_field'] = $this->session->data['customer']['custom_field'];
 
-					// Payment Details
-					$order_data['payment_firstname'] = $this->session->data['payment_address']['firstname'];
-					$order_data['payment_lastname'] = $this->session->data['payment_address']['lastname'];
-					$order_data['payment_company'] = $this->session->data['payment_address']['company'];
-					$order_data['payment_address_1'] = $this->session->data['payment_address']['address_1'];
-					$order_data['payment_address_2'] = $this->session->data['payment_address']['address_2'];
-					$order_data['payment_city'] = $this->session->data['payment_address']['city'];
-					$order_data['payment_postcode'] = $this->session->data['payment_address']['postcode'];
-					$order_data['payment_zone'] = $this->session->data['payment_address']['zone'];
-					$order_data['payment_zone_id'] = $this->session->data['payment_address']['zone_id'];
-					$order_data['payment_country'] = $this->session->data['payment_address']['country'];
-					$order_data['payment_country_id'] = $this->session->data['payment_address']['country_id'];
-					$order_data['payment_address_format'] = $this->session->data['payment_address']['address_format'];
-					$order_data['payment_custom_field'] = $this->session->data['payment_address']['custom_field'];
+					// Payment Details //8-custom-code
+					$order_data['payment_firstname'] = $this->session->data['customer']['firstname'];//$this->session->data['payment_address']['firstname'];
+					$order_data['payment_lastname'] = $this->session->data['customer']['lastname'];//$this->session->data['payment_address']['lastname'];
+					$order_data['payment_company'] = '';//$this->session->data['payment_address']['company'];
+					$order_data['payment_address_1'] = '';//$this->session->data['payment_address']['address_1'];
+					$order_data['payment_address_2'] = '';//$this->session->data['payment_address']['address_2'];
+					$order_data['payment_city'] = '';//$this->session->data['payment_address']['city'];
+					$order_data['payment_postcode'] = '';//$this->session->data['payment_address']['postcode'];
+					$order_data['payment_zone'] = '';//$this->session->data['payment_address']['zone'];
+					$order_data['payment_zone_id'] = 0;//$this->session->data['payment_address']['zone_id'];
+					$order_data['payment_country'] = $this->session->data['shipping_address']['country'];//$this->session->data['payment_address']['country'];
+					$order_data['payment_country_id'] = $this->session->data['shipping_address']['country_id'];//$this->session->data['payment_address']['country_id'];
+					$order_data['payment_address_format'] = '';//$this->session->data['payment_address']['address_format'];
+					$order_data['payment_custom_field'] = array();//$this->session->data['payment_address']['custom_field'];
 
 					if (isset($this->session->data['payment_method']['title'])) {
 						$order_data['payment_method'] = $this->session->data['payment_method']['title'];
