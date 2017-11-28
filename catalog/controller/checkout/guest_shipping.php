@@ -103,11 +103,11 @@ class ControllerCheckoutGuestShipping extends Controller {
 
 		if (!$json) {
 			if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
-				$json['error']['firstname'] = $this->language->get('error_firstname');
+				//$json['error']['firstname'] = $this->language->get('error_firstname'); //8-custom-code: ignore fields
 			}
 
 			if ((utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
-				$json['error']['lastname'] = $this->language->get('error_lastname');
+				//$json['error']['lastname'] = $this->language->get('error_lastname'); //8-custom-code: ignore fields
 			}
 
 			if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
@@ -123,7 +123,7 @@ class ControllerCheckoutGuestShipping extends Controller {
 			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 
 			if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
-				$json['error']['postcode'] = $this->language->get('error_postcode');
+				//$json['error']['postcode'] = $this->language->get('error_postcode'); //8-custom-code: ignore fields
 			}
 
 			if ($this->request->post['country_id'] == '') {

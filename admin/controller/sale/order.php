@@ -965,9 +965,10 @@ class ControllerSaleOrder extends Controller {
 			$totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
 
 			foreach ($totals as $total) {
+				//8-custom-code: skip price rendering for shipping info. we don't handle it.
 				$data['totals'][] = array(
 					'title' => $total['title'],
-					'text'  => $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value'])
+					'text'  => $total['code'] === 'shipping' ? '' : $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value'])
 				);
 			}
 
@@ -1639,8 +1640,9 @@ class ControllerSaleOrder extends Controller {
 
 				foreach ($totals as $total) {
 					$total_data[] = array(
+						//8-custom-code: skip price rendering for shipping info. we don't handle it.
 						'title' => $total['title'],
-						'text'  => $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value'])
+						'text'  => $total['code'] === 'shipping' ? '' : $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value'])
 					);
 				}
 

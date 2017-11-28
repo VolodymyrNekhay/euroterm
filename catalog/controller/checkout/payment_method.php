@@ -106,11 +106,15 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
 
+			//8-custom-code: skip agreement
+			/*
 			if ($information_info) {
 				$data['text_agree'] = sprintf($this->language->get('text_agree'), $this->url->link('information/information/agree', 'information_id=' . $this->config->get('config_checkout_id'), true), $information_info['title'], $information_info['title']);
 			} else {
 				$data['text_agree'] = '';
 			}
+			*/
+			$data['text_agree'] = '';
 		} else {
 			$data['text_agree'] = '';
 		}
@@ -170,7 +174,8 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
 
 			if ($information_info && !isset($this->request->post['agree'])) {
-				$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
+				//8-custom-code: no need in agreement confirmation
+				//$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
 			}
 		}
 
