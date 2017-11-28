@@ -401,9 +401,10 @@ class ControllerCheckoutConfirm extends Controller {
 			$data['totals'] = array();
 
 			foreach ($order_data['totals'] as $total) {
+				//8-custom-code: skip price rendering for shipping info. we don't handle it.
 				$data['totals'][] = array(
 					'title' => $total['title'],
-					'text'  => $this->currency->format($total['value'], $this->session->data['currency'])
+					'text'  => $total['code'] === 'shipping' ? '' : $this->currency->format($total['value'], $this->session->data['currency'])
 				);
 			}
 

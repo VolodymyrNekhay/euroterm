@@ -553,14 +553,14 @@ footer h5 {
 }
 .product-thumb .caption {
 	padding: 0 20px;
-	min-height: 180px;
+	min-height: 100px;
 }
 .product-list .product-thumb .caption {
 	margin-left: 230px;
 }
 @media (max-width: 1200px) {
 .product-grid .product-thumb .caption {
-	min-height: 210px;
+	min-height: 120px;
 	padding: 0 10px;
 }
 }
@@ -624,7 +624,7 @@ h2.price {
 	}
 }
 .product-thumb .button-group button {
-	width: 60%;
+	width: 100%;
 	border: none;
 	display: inline-block;
 	float: left;
@@ -647,12 +647,12 @@ h2.price {
 }
 @media (max-width: 1200px) {
 	.product-thumb .button-group button, .product-thumb .button-group button + button {
-		width: 33.33%;
+		width: 100%;
 	}
 }
 @media (max-width: 767px) {
 	.product-thumb .button-group button, .product-thumb .button-group button + button {
-		width: 33.33%;
+		width: 100%;
 	}
 }
 .thumbnails {

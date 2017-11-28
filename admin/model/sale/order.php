@@ -22,22 +22,28 @@ class ModelSaleOrder extends Model {
 				$payment_zone_code = '';
 			}
 
-			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['shipping_country_id'] . "'");
+			//8-custom-code: use translated names.
+			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country_ru_ru` WHERE country_id = '" . (int)$order_query->row['shipping_country_id'] . "'");
 
 			if ($country_query->num_rows) {
-				$shipping_iso_code_2 = $country_query->row['iso_code_2'];
-				$shipping_iso_code_3 = $country_query->row['iso_code_3'];
+				$shipping_iso_code_2   = $country_query->row['iso_code_2'];
+				$shipping_iso_code_3   = $country_query->row['iso_code_3'];
+				$shipping_country_name = $country_query->row['name']; //8-custom-code
 			} else {
-				$shipping_iso_code_2 = '';
-				$shipping_iso_code_3 = '';
+				$shipping_iso_code_2   = '';
+				$shipping_iso_code_3   = '';
+				$shipping_country_name = ''; //8-custom-code
 			}
 
-			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$order_query->row['shipping_zone_id'] . "'");
+			//8-custom-code: use translated names.
+			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone_ru_ru` WHERE zone_id = '" . (int)$order_query->row['shipping_zone_id'] . "'");
 
 			if ($zone_query->num_rows) {
 				$shipping_zone_code = $zone_query->row['code'];
+				$shipping_zone_name = $zone_query->row['name']; //8-custom-code
 			} else {
 				$shipping_zone_code = '';
+				$shipping_zone_name = ''; //8-custom-code
 			}
 
 			$reward = 0;
@@ -111,10 +117,10 @@ class ModelSaleOrder extends Model {
 				'shipping_postcode'       => $order_query->row['shipping_postcode'],
 				'shipping_city'           => $order_query->row['shipping_city'],
 				'shipping_zone_id'        => $order_query->row['shipping_zone_id'],
-				'shipping_zone'           => $order_query->row['shipping_zone'],
+				'shipping_zone'           => $shipping_zone_name,//$order_query->row['shipping_zone'], //8-custom-code
 				'shipping_zone_code'      => $shipping_zone_code,
 				'shipping_country_id'     => $order_query->row['shipping_country_id'],
-				'shipping_country'        => $order_query->row['shipping_country'],
+				'shipping_country'        => $shipping_country_name,//$order_query->row['shipping_country'], //8-custom-code
 				'shipping_iso_code_2'     => $shipping_iso_code_2,
 				'shipping_iso_code_3'     => $shipping_iso_code_3,
 				'shipping_address_format' => $order_query->row['shipping_address_format'],

@@ -207,9 +207,10 @@ class ControllerCheckoutCart extends Controller {
 			$data['totals'] = array();
 
 			foreach ($totals as $total) {
+				//8-custom-code: skip price rendering for shipping info. we don't handle it.
 				$data['totals'][] = array(
 					'title' => $total['title'],
-					'text'  => $this->currency->format($total['value'], $this->session->data['currency'])
+					'text'  => $total['code'] === 'shipping' ? '' : $this->currency->format($total['value'], $this->session->data['currency'])
 				);
 			}
 
@@ -220,7 +221,8 @@ class ControllerCheckoutCart extends Controller {
 			$this->load->model('setting/extension');
 
 			$data['modules'] = array();
-			
+			//8-custom-code: skip modules rendering. we don't handle it.
+			/*
 			$files = glob(DIR_APPLICATION . '/controller/extension/total/*.php');
 
 			if ($files) {
@@ -232,7 +234,7 @@ class ControllerCheckoutCart extends Controller {
 					}
 				}
 			}
-
+			*/
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');

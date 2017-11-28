@@ -34,11 +34,11 @@ class ControllerApiShipping extends Controller {
 				}
 
 				if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
-					$json['error']['firstname'] = $this->language->get('error_firstname');
+					//$json['error']['firstname'] = $this->language->get('error_firstname'); //8-custom-code
 				}
 
 				if ((utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
-					$json['error']['lastname'] = $this->language->get('error_lastname');
+					//$json['error']['lastname'] = $this->language->get('error_lastname'); //8-custom-code
 				}
 
 				if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {

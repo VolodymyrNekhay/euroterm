@@ -8,14 +8,15 @@ class ModelLocalisationCountry extends Model {
 
 	public function getCountries() {
 		$country_data = $this->cache->get('country.catalog');
-
-		if (!$country_data) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' ORDER BY name ASC");
+		//8-custom-code: get names based on selected language (front-end)
+		//if (!$country_data) {
+			//$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' ORDER BY name ASC");
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country_" . str_replace("-","_",$this->session->data['language']) . " WHERE status = '1' ORDER BY name ASC");
 
 			$country_data = $query->rows;
 
 			$this->cache->set('country.catalog', $country_data);
-		}
+		//}
 
 		return $country_data;
 	}
