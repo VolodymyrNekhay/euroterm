@@ -66,10 +66,11 @@ class ModelLocalisationZone extends Model {
 
 	public function getZonesByCountryId($country_id) {
 		//8-custom-code: skip cache.
+		//11-admin-order-country-state-localization
 		//$zone_data = $this->cache->get('zone.' . (int)$country_id);
 
 		//if (!$zone_data) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone WHERE country_id = '" . (int)$country_id . "' AND status = '1' ORDER BY name");
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_ru_ru WHERE country_id = '" . (int)$country_id . "' AND status = '1' ORDER BY name");
 
 			$zone_data = $query->rows;
 
