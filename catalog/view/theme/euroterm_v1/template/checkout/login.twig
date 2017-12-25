@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2>{{ text_new_customer }}</h2>
+    <p>{{ text_checkout }}</p>
+    <div class="radio">
+      <label>
+        <input type="radio" name="account" value="guest" checked="checked" />
+        {{ text_guest }}</label>
+    </div>
+    <input type="button" value="{{ button_continue }}" id="button-account" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+  </div>
+</div>
