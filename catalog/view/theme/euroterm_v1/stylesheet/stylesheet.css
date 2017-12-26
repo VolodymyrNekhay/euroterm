@@ -79,7 +79,7 @@ div.required .control-label:before {
 }
 /* top */
 #top {
-	background-color: #EEEEEE;
+	background-color: #F0F0E9;
 	border-bottom: 1px solid #e2e2e2;
 	padding: 4px 0px 3px 0;
 	margin: 0 0 20px 0;
@@ -126,7 +126,7 @@ div.required .control-label:before {
 }
 /* logo */
 #logo {
-	margin: 0 0 50px 0;
+	margin: 0 0 10px 0;
 }
 /* search */
 #search {
@@ -313,7 +313,7 @@ div.required .control-label:before {
 footer {
 	margin-top: 30px;
 	padding-top: 30px;
-	background-color: #303030;
+	background-color: #F0F0E9;
 	border-top: 1px solid #ddd;
 	color: #e2e2e2;
 }
@@ -322,16 +322,19 @@ footer hr {
 	border-bottom: 1px solid #666;
 }
 footer a {
-	color: #ccc;
+	color: #8C8C88;
 }
 footer a:hover {
-	color: #fff;
+	color: #666663;
 }
 footer h5 {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
 	font-weight: bold;
-	color: #fff;
+	color: #666663;
+}
+footer p {
+    color: #8C8C88;
 }
 /* alert */
 .alert {
@@ -342,6 +345,7 @@ footer h5 {
 	margin: 0 0 20px 0;
 	padding: 8px 0;
 	border: 1px solid #ddd;
+    background-color: #F0F0E9;
 }
 .breadcrumb i {
 	font-size: 15px;
@@ -410,22 +414,26 @@ footer h5 {
 .btn-default {
 	color: #777;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	background-color: #e7e7e7;
-	background-image: linear-gradient(to bottom, #eeeeee, #dddddd);
+	background-color: #f0f0e9;
 	background-repeat: repeat-x;
 	border-color: #dddddd #dddddd #b3b3b3 #b7b7b7;
 }
 .btn-primary {
-	color: #ffffff;
+	color: #888;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	background-color: #229ac8;
-	background-image: linear-gradient(to bottom, #23a1d1, #1f90bb);
+	background-color: #f5f5ed;
 	background-repeat: repeat-x;
-	border-color: #1f90bb #1f90bb #145e7a;
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
-	background-color: #1f90bb;
+    color: #444;
+    background-color: #ddd;
+    border: 1px solid #cccccc;
 	background-position: 0 -15px;
+}
+.btn-primary:focus {
+    color: #444;
+    background-color: #ddd;
+    border: 1px solid #cccccc;
 }
 .btn-warning {
 	color: #ffffff;
@@ -628,7 +636,7 @@ h2.price {
 	border: none;
 	display: inline-block;
 	float: left;
-	background-color: #eee;
+	background-color: #f5f5ed;
 	color: #888;
 	line-height: 38px;
 	font-weight: bold;
