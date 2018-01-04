@@ -54,8 +54,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4">
-        <div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
-          <h1><a href="{{ home }}">{{ name }}</a></h1>
+        <div id="logo">{% if logo %}<a href="{{ home }}" class="logo-img"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a><h1 class="title-logo"><a href="{{ home }}">{{ name }}</a></h1>{% else %}
+          <h1 class="title-logo"><a href="{{ home }}">{{ name }}</a></h1>
           {% endif %}</div>
       </div>
       <div class="col-sm-5">{{ search }}</div>
