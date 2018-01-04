@@ -46,25 +46,27 @@
             {% endfor %}
           </select>
         </div>
-        <div class="col-sm-3">
-          <label class="checkbox-inline">
-            {% if sub_category %}
-            <input type="checkbox" name="sub_category" value="1" checked="checked" />
-            {% else %}
-            <input type="checkbox" name="sub_category" value="1" />
-            {% endif %}
-            {{ text_sub_category }}</label>
-        </div>
       </div>
-      <p>
-        <label class="checkbox-inline">
-          {% if description %}
-          <input type="checkbox" name="description" value="1" id="description" checked="checked" />
-          {% else %}
-          <input type="checkbox" name="description" value="1" id="description" />
-          {% endif %}
-          {{ entry_description }}</label>
-      </p>
+      <div class="row">
+          <div class="col-sm-4">
+              <label class="checkbox-inline">
+                  {% if description %}
+                  <input type="checkbox" name="description" value="1" id="description" checked="checked" />
+                  {% else %}
+                  <input type="checkbox" name="description" value="1" id="description" />
+                  {% endif %}
+                  {{ entry_description }}</label>
+          </div>
+          <div class="col-sm-3">
+              <label class="checkbox-inline">
+                {% if sub_category %}
+                <input type="checkbox" name="sub_category" value="1" checked="checked" />
+                {% else %}
+                <input type="checkbox" name="sub_category" value="1" />
+                {% endif %}
+                {{ text_sub_category }}</label>
+          </div>
+      </div>
       <input type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" />
       <h2>{{ text_search }}</h2>
       {% if products %}
@@ -77,7 +79,6 @@
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <a href="{{ compare }}" id="compare-total" class="btn btn-link">{{ text_compare }}</a>
           </div>
         </div>
         <div class="col-md-4 col-xs-6">
@@ -144,10 +145,6 @@
               </div>
               <div class="button-group">
                 <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span>{{ button_cart }}</span></button>
-                <!--
-                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
-                -->
               </div>
             </div>
           </div>
@@ -159,7 +156,7 @@
         <div class="col-sm-6 text-right">{{ results }}</div>
       </div>
       {% else %}
-      <p>{{ text_empty }}</p>
+      <p>{{ text_empty_search_result }}</p>
       {% endif %}
       {{ content_bottom }}</div>
     {{ column_right }}</div>

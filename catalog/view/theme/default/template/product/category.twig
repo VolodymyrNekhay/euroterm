@@ -58,7 +58,6 @@
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
-          <div class="form-group"><a href="{{ compare }}" id="compare-total" class="btn btn-link">{{ text_compare }}</a></div>
         </div>
         <div class="col-md-4 col-xs-6">
           <div class="form-group input-group input-group-sm">
@@ -146,10 +145,6 @@
                 {% endif %} </div>
               <div class="button-group">
                 <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span>{{ button_cart }}</span></button>
-                <!--
-                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
-                -->
               </div>
             </div>
           </div>
@@ -161,7 +156,7 @@
       </div>
       {% endif %}
       {% if not categories and not products %}
-      <p>{{ text_empty }}</p>
+      <p>{{ text_empty_category_result }}</p>
       <div class="buttons">
         <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
       </div>
