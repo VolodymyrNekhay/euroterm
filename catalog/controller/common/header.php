@@ -48,7 +48,7 @@ class ControllerCommonHeader extends Controller {
 			$data['logo_txt'] = '';
 		}
 
-        //$data['header_store_info'] = $this->load->controller('information/information/custom', 'header_info');
+        $data['header_store_info'] = $this->load->controller('information/information/custom', 'header_info');
 
 		$this->load->language('common/header');
 
