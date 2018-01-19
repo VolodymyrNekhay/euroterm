@@ -23,8 +23,8 @@ class ModelCatalogInformation extends Model {
 	}
     
     public function getInformationIdByTitle($information_title) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_description WHERE title = '" . $information_title . "'");
-        
+        $query = $this->db->query("SELECT information_id FROM " . DB_PREFIX . "information_description WHERE title = '" . $information_title . "' LIMIT 1");
+
         if ($query->num_rows) {
 			return (int)$query->row['information_id'];
 		} else {
