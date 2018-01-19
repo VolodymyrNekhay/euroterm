@@ -99,8 +99,7 @@ class ControllerInformationInformation extends Controller {
         if (!empty($information_title)) {
             $information_id = $this->model_catalog_information->getInformationIdByTitle($information_title);
 
-            if(isset($information_id))
-            {
+            if (isset($information_id)) {
                 $information_info = $this->model_catalog_information->getInformation($information_id);
     
         		if ($information_info) {
