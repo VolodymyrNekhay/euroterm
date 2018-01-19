@@ -90,4 +90,25 @@ class ControllerInformationInformation extends Controller {
 
 		$this->response->setOutput($output);
 	}
+    
+    public function custom($information_title) {
+		$this->load->model('catalog/information');
+
+		$output = '';
+        
+        if (!empty($information_title)) {
+            $information_id = $this->model_catalog_information->getInformationIdByTitle($information_title);
+
+            if(isset($information_id))
+            {
+                $information_info = $this->model_catalog_information->getInformation($information_id);
+    
+        		if ($information_info) {
+        			$output .= html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8') . "\n";
+        		}
+            }
+        }
+
+		return $output; 
+	}
 }
