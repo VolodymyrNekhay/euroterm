@@ -37,11 +37,18 @@ class ControllerCommonHeader extends Controller {
 
 		$data['name'] = $this->config->get('config_name');
 
-		if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
+		if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) { 
 			$data['logo'] = $server . 'image/' . $this->config->get('config_logo');
 		} else {
 			$data['logo'] = '';
 		}
+        if (is_file(DIR_IMAGE . 'catalog/logo_txt.png')) { 
+			$data['logo_txt'] = $server . 'image/' . 'catalog/logo_txt.png';
+		} else {
+			$data['logo_txt'] = '';
+		}
+
+        $data['header_store_info'] = $this->load->controller('information/information/custom', 'header_info');
 
 		$this->load->language('common/header');
 

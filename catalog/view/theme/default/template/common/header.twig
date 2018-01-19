@@ -54,12 +54,22 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4">
-        <div id="logo">{% if logo %}<a href="{{ home }}" class="logo-img"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a><h1 class="title-logo"><a href="{{ home }}">{{ name }}</a></h1>{% else %}
-          <h1 class="title-logo"><a href="{{ home }}">{{ name }}</a></h1>
-          {% endif %}</div>
+        <div id="logo">
+          {% if logo %}
+            <div>
+              <a href="{{ home }}" class="logo-img"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>
+            </div>
+          {% endif %}
+          {% if logo_txt %}
+            <div>
+              <a href="{{ home }}" class="logo-img"><img src="{{ logo_txt }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>
+            </div>
+          {% endif %}
+        </div>
       </div>
       <div class="col-sm-5">{{ search }}</div>
       <div class="col-sm-3">{{ cart }}</div>
+      {{ header_store_info }}
     </div>
   </div>
 </header>
