@@ -88,10 +88,6 @@
                 {% endif %} </div>
               <div class="button-group">
                 <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span>{{ button_cart }}</span></button>
-                <!--
-                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
-                -->
               </div>
             </div>
           </div>
@@ -102,7 +98,7 @@
         <div class="col-sm-6 text-right">{{ results }}</div>
       </div>
       {% else %}
-      <p>{{ text_empty }}</p>
+      <p>{{ text_empty_manufacturer_result }}</p>
       <div class="buttons">
         <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
       </div>
