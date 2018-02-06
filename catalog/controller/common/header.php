@@ -42,10 +42,10 @@ class ControllerCommonHeader extends Controller {
 		} else {
 			$data['logo'] = '';
 		}
-        if (is_file(DIR_IMAGE . 'catalog/logo_txt.png')) { 
-			$data['logo_txt'] = $server . 'image/' . 'catalog/logo_txt.png';
+        if (is_file(DIR_IMAGE . 'catalog/logo_bottom.png')) { 
+			$data['logo_bottom'] = $server . 'image/' . 'catalog/logo_bottom.png';
 		} else {
-			$data['logo_txt'] = '';
+			$data['logo_bottom'] = '';
 		}
 
         $data['header_store_info'] = $this->load->controller('information/information/custom', 'header_info');
