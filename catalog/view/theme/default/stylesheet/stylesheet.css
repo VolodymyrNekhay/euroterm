@@ -137,6 +137,12 @@ div.required .control-label:before {
 .logo-img {
     display: inline-block;
 }
+.text_logo_bottom {
+    color: rgb(0, 108, 174);
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
 /* search */
 #search {
 	margin-bottom: 10px;
