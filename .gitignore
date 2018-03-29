@@ -11,3 +11,4 @@ config.php
 .buildpath
 .project
 .settings/org.eclipse.php.core.prefs
+install/

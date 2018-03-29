@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.png
+Disallow: /?
+Disallow: /admin
+Disallow: /download
+Disallow: /system
+
+Host: euroterm.cv.ua
+Sitemap: http://euroterm.cv.ua/index.php?route=extension/feed/google_sitemap
