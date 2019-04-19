@@ -7,4 +7,4 @@ Disallow: /admin
 Disallow: /download
 Disallow: /system
 Host: euroterm.cv.ua
-Sitemap: http://euroterm.cv.ua/index.php?route=extension/feed/google_sitemap
+Sitemap: https://euroterm.cv.ua/sitemap.xml
