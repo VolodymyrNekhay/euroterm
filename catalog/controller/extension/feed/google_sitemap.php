@@ -87,7 +87,8 @@ class ControllerExtensionFeedGoogleSitemap extends Controller {
 			if (!$current_path) {
 				$new_path = $result['category_id'];
 			} else {
-				$new_path = $current_path . '_' . $result['category_id'];
+			    $new_path = $result['category_id']; //send canonicals only
+				//$new_path = $current_path . '_' . $result['category_id'];
 			}
 
 			$output .= '<url>';
