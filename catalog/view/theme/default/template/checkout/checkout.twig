@@ -105,8 +105,10 @@ $(document).on('change', 'input[name=\'account\']', function() {
 
 {% if not logged %}
 $(document).ready(function() {
+    var langCode = $('#currentLanguage').attr('value');
+
     $.ajax({
-        url: 'index.php?route=checkout/login',
+        url: 'index.php?route=checkout/login' + '&lang=' + langCode,
         dataType: 'html',
         success: function(html) {
            $('#collapse-checkout-option .panel-body').html(html);
@@ -141,8 +143,10 @@ $(document).ready(function() {
 
 // Checkout
 $(document).delegate('#button-account', 'click', function() {
+    var langCode = $('#currentLanguage').attr('value');
+
     $.ajax({
-        url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').val(),
+        url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').val() + '&lang=' + langCode,
         dataType: 'html',
         beforeSend: function() {
         	$('#button-account').button('loading');
@@ -243,8 +247,10 @@ $(document).delegate('#button-register', 'click', function() {
                 var shipping_address = $('#payment-address input[name=\'shipping_address\']:checked').prop('value');
 
                 if (shipping_address) {
+                    var langCode = $('#currentLanguage').attr('value');
+                    
                     $.ajax({
-                        url: 'index.php?route=checkout/shipping_method',
+                        url: 'index.php?route=checkout/shipping_method' + '&lang=' + langCode,
                         dataType: 'html',
                         success: function(html) {
 							// Add the shipping address
@@ -297,7 +303,7 @@ $(document).delegate('#button-register', 'click', function() {
                 }
                 {% else %}
                 $.ajax({
-                    url: 'index.php?route=checkout/payment_method',
+                    url: 'index.php?route=checkout/payment_method' + '&lang=' + $('#currentLanguage').attr('value'),
                     dataType: 'html',
                     success: function(html) {
                         $('#collapse-payment-method .panel-body').html(html);
@@ -313,9 +319,8 @@ $(document).delegate('#button-register', 'click', function() {
                     }
                 });
                 {% endif %}
-
                 $.ajax({
-                    url: 'index.php?route=checkout/payment_address',
+                    url: 'index.php?route=checkout/payment_address' + '&lang=' + $('#currentLanguage').attr('value'),
                     dataType: 'html',
                     complete: function() {
                         $('#button-register').button('reset');
@@ -406,7 +411,7 @@ $(document).delegate('#button-payment-address', 'click', function() {
 				});
                 {% else %}
                 $.ajax({
-                    url: 'index.php?route=checkout/payment_method',
+                    url: 'index.php?route=checkout/payment_method' + '&lang=' + $('#currentLanguage').attr('value'),
                     dataType: 'html',
                     success: function(html) {
                         $('#collapse-payment-method .panel-body').html(html);
@@ -477,8 +482,10 @@ $(document).delegate('#button-shipping-address', 'click', function() {
 				// Highlight any found errors
 				$('.text-danger').parent().parent().addClass('has-error');
             } else {
+                var langCode = $('#currentLanguage').attr('value');
+                
                 $.ajax({
-                    url: 'index.php?route=checkout/shipping_method',
+                    url: 'index.php?route=checkout/shipping_method' + '&lang=' + langCode,
                     dataType: 'html',
                     complete: function() {
                         $('#button-shipping-address').button('reset');
@@ -529,6 +536,8 @@ $(document).delegate('#button-shipping-address', 'click', function() {
 
 // Guest
 $(document).delegate('#button-guest', 'click', function() {
+    var langCode = $('#currentLanguage').attr('value');
+
     $.ajax({
         url: 'index.php?route=checkout/guest/save',
         type: 'post',
@@ -565,10 +574,11 @@ $(document).delegate('#button-guest', 'click', function() {
             } else {
                 {% if shipping_required %}
                 var shipping_address = $('#collapse-payment-address input[name=\'shipping_address\']:checked').prop('value');
+                var langCode = $('#currentLanguage').attr('value');
 
                 if (shipping_address) {
                     $.ajax({
-                        url: 'index.php?route=checkout/shipping_method',
+                        url: 'index.php?route=checkout/shipping_method' + '&lang=' + langCode,
                         dataType: 'html',
                         complete: function() {
                             $('#button-guest').button('reset');
@@ -576,7 +586,7 @@ $(document).delegate('#button-guest', 'click', function() {
                         success: function(html) {
 							// Add the shipping address
                             $.ajax({
-                                url: 'index.php?route=checkout/guest_shipping',
+                                url: 'index.php?route=checkout/guest_shipping' + '&lang=' + langCode,
                                 dataType: 'html',
                                 success: function(html) {
                                     $('#collapse-shipping-address .panel-body').html(html);
@@ -603,7 +613,7 @@ $(document).delegate('#button-guest', 'click', function() {
                     });
                 } else {
                     $.ajax({
-                        url: 'index.php?route=checkout/guest_shipping',
+                        url: 'index.php?route=checkout/guest_shipping' + '&lang=' + langCode,
                         dataType: 'html',
                         complete: function() {
                             $('#button-guest').button('reset');
@@ -626,7 +636,7 @@ $(document).delegate('#button-guest', 'click', function() {
                 }
                 {% else %}
                 $.ajax({
-                    url: 'index.php?route=checkout/payment_method',
+                    url: 'index.php?route=checkout/payment_method' + '&lang=' + $('#currentLanguage').attr('value'),
                     dataType: 'html',
                     complete: function() {
                         $('#button-guest').button('reset');
@@ -689,8 +699,10 @@ $(document).delegate('#button-guest-shipping', 'click', function() {
 				// Highlight any found errors
 				$('.text-danger').parent().addClass('has-error');
             } else {
+                var langCode = $('#currentLanguage').attr('value');
+
                 $.ajax({
-                    url: 'index.php?route=checkout/shipping_method',
+                    url: 'index.php?route=checkout/shipping_method' + '&lang=' + langCode,
                     dataType: 'html',
                     complete: function() {
                         $('#button-guest-shipping').button('reset');
@@ -739,7 +751,7 @@ $(document).delegate('#button-shipping-method', 'click', function() {
                 }
             } else {
                 $.ajax({
-                    url: 'index.php?route=checkout/payment_method',
+                    url: 'index.php?route=checkout/payment_method' + '&lang=' + $('#currentLanguage').attr('value'),
                     dataType: 'html',
                     complete: function() {
                         $('#button-shipping-method').button('reset');
@@ -787,7 +799,7 @@ $(document).delegate('#button-payment-method', 'click', function() {
                 }
             } else {
                 $.ajax({
-                    url: 'index.php?route=checkout/confirm',
+                    url: 'index.php?route=checkout/confirm' + '&lang=' + $('#currentLanguage').attr('value'),
                     dataType: 'html',
                     complete: function() {
                         $('#button-payment-method').button('reset');

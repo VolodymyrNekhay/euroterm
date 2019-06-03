@@ -15,31 +15,36 @@ class ControllerCommonLanguage extends Controller {
 
 		foreach ($results as $result) {
 			if ($result['status']) {
+			 
+                if (!isset($this->request->get['route'])) {
+        			$data['redirect'] = $this->url->link('common/home');
+                    $langRedirect = $data['redirect'];
+        		} else {
+        			$url_data = $this->request->get;
+        
+        			unset($url_data['_route_']);
+        
+        			$route = $url_data['route'];
+        
+        			unset($url_data['route']);
+        
+        			$url = '';
+        
+        			if ($url_data) {
+        				$url = '&' . urldecode(http_build_query($url_data, '', '&'));
+        			}
+        
+                    $data['redirect'] = $this->url->link($route, $url, $this->request->server['HTTPS'], $result['code']);
+                    
+                    $langRedirect = $data['redirect']; 
+        		}
+             
 				$data['languages'][] = array(
 					'name' => $result['name'],
-					'code' => $result['code']
+					'code' => $result['code'],
+                    'langredirect' => $langRedirect
 				);
 			}
-		}
-
-		if (!isset($this->request->get['route'])) {
-			$data['redirect'] = $this->url->link('common/home');
-		} else {
-			$url_data = $this->request->get;
-
-			unset($url_data['_route_']);
-
-			$route = $url_data['route'];
-
-			unset($url_data['route']);
-
-			$url = '';
-
-			if ($url_data) {
-				$url = '&' . urldecode(http_build_query($url_data, '', '&'));
-			}
-
-			$data['redirect'] = $this->url->link($route, $url, $this->request->server['HTTPS']);
 		}
 
 		return $this->load->view('common/language', $data);
@@ -51,7 +56,7 @@ class ControllerCommonLanguage extends Controller {
 		}
 
 		if (isset($this->request->post['redirect'])) {
-			$this->response->redirect($this->request->post['redirect']);
+		    $this->response->redirect($this->request->post['redirect']);
 		} else {
 			$this->response->redirect($this->url->link('common/home'));
 		}
