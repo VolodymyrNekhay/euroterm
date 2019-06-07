@@ -42,16 +42,17 @@ class Url {
 	 * @param	string		$route
 	 * @param	mixed		$args
 	 * @param	bool		$secure
+     * @param	string		$forceLang
 	 *
 	 * @return	string
  	*/
-	public function link($route, $args = '', $secure = false) {
+	public function link($route, $args = '', $secure = false, $forceLang = null) {
 		if ($this->ssl && $secure) {
 			$url = $this->ssl . 'index.php?route=' . $route;
 		} else {
 			$url = $this->url . 'index.php?route=' . $route;
 		}
-		
+
 		if ($args) {
 			if (is_array($args)) {
 				$url .= '&amp;' . http_build_query($args);
@@ -61,7 +62,7 @@ class Url {
 		}
 		
 		foreach ($this->rewrite as $rewrite) {
-			$url = $rewrite->rewrite($url);
+			$url = $rewrite->rewrite($url, $forceLang);
 		}
 		
 		return $url; 

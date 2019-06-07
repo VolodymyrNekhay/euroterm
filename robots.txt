@@ -6,5 +6,5 @@ Allow: /*.png
 Disallow: /admin
 Disallow: /download
 Disallow: /system
-Host: euroterm.cv.ua
+Host: https://euroterm.cv.ua
 Sitemap: https://euroterm.cv.ua/sitemap.xml

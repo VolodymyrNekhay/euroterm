@@ -306,8 +306,10 @@ $('.datetime').datetimepicker({
 //--></script>
 <script type="text/javascript"><!--
 $('#collapse-payment-address select[name=\'country_id\']').on('change', function() {
-	$.ajax({
-		url: 'index.php?route=checkout/checkout/country&country_id=' + this.value,
+	var langCode = $('#currentLanguage').attr('value');
+
+    $.ajax({
+		url: 'index.php?route=checkout/checkout/country&country_id=' + this.value + '&lang=' + langCode,
 		dataType: 'json',
 		beforeSend: function() {
 			$('#collapse-payment-address select[name=\'country_id\']').prop('disabled', true);

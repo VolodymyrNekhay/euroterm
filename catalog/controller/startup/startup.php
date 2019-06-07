@@ -86,15 +86,28 @@ class ControllerStartupStartup extends Controller {
 			
 			$code = $detect ? $detect : '';
 		}
-		
+        
+        //LANGPARAM 1
+        if (isset($this->request->get['_route_'])) {
+            $parts = explode('/', $this->request->get['_route_']);
+            //first check if it is ru-ru or uk-ua and only after use as code!!!
+            $code = $parts[0]; 
+        } else {
+            if (isset($this->request->get['lang'])) {
+                $code = $this->request->get['lang'];
+            } else {
+                $code = 'ua';
+            }
+        }
+
 		if (!array_key_exists($code, $languages)) {
 			$code = $this->config->get('config_language');
 		}
-		
+
 		if (!isset($this->session->data['language']) || $this->session->data['language'] != $code) {
 			$this->session->data['language'] = $code;
 		}
-				
+        
 		if (!isset($this->request->cookie['language']) || $this->request->cookie['language'] != $code) {
 			setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
 		}

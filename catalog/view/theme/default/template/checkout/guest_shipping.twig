@@ -291,8 +291,10 @@ $('.datetime').datetimepicker({
 //--></script> 
 <script type="text/javascript"><!--
 $('#collapse-shipping-address select[name=\'country_id\']').on('change', function() {
+    var langCode = $('#currentLanguage').attr('value');
+
 	$.ajax({
-		url: 'index.php?route=checkout/checkout/country&country_id=' + this.value,
+		url: 'index.php?route=checkout/checkout/country&country_id=' + this.value + '&lang=' + langCode,
 		dataType: 'json',
 		beforeSend: function() {
 			$('#collapse-shipping-address select[name=\'country_id\']').prop('disabled', true);

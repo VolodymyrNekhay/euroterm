@@ -2,25 +2,32 @@
 class ControllerExtensionFeedGoogleSitemap extends Controller {
 	public function index() {
 		if ($this->config->get('feed_google_sitemap_status')) {
-
-            if (isset($_GET['lang']) && !empty($_GET['lang'])) {
-                $this->config->set('config_language_id', $_GET['lang']);
+            if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'ru' || $_GET['lang'] == '2')) {
+                $this->config->set('config_language_id', '2');
+                $this->session->data['language'] = 'ru';
+                $forceLang = 'ru';
+            } else if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'ua' || $_GET['lang'] == '3')) {
+                $this->config->set('config_language_id', '3');
+                $this->session->data['language'] = 'ua';
+                $forceLang = 'ua';
             } else {
                 $this->config->set('config_language_id', '3');
+                $this->session->data['language'] = 'ua';
+                $forceLang = 'ua';
             }
 
 			$output  = '<?xml version="1.0" encoding="UTF-8"?>';
 			$output .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 
-			$this->load->model('catalog/product');
+            $this->load->model('catalog/product');
 			$this->load->model('tool/image');
 
 			$products = $this->model_catalog_product->getProducts();
 
-			foreach ($products as $product) {
+            foreach ($products as $product) {
 				if ($product['image']) {
 					$output .= '<url>';
-					$output .= '  <loc>' . $this->url->link('product/product', 'product_id=' . $product['product_id']) . '</loc>';
+				    $output .= '  <loc>' . $this->url->link('product/product', 'product_id=' . $product['product_id']) . '</loc>';
 					$output .= '  <changefreq>weekly</changefreq>';
 					$output .= '  <lastmod>' . date('Y-m-d\TH:i:sP', strtotime($product['date_modified'])) . '</lastmod>';
 					$output .= '  <priority>1.0</priority>';
@@ -36,28 +43,6 @@ class ControllerExtensionFeedGoogleSitemap extends Controller {
 			$this->load->model('catalog/category');
 
 			$output .= $this->getCategories(0);
-
-			$this->load->model('catalog/manufacturer');
-
-			$manufacturers = $this->model_catalog_manufacturer->getManufacturers();
-
-			foreach ($manufacturers as $manufacturer) {
-				$output .= '<url>';
-				$output .= '  <loc>' . $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer['manufacturer_id']) . '</loc>';
-				$output .= '  <changefreq>weekly</changefreq>';
-				$output .= '  <priority>0.7</priority>';
-				$output .= '</url>';
-
-				$products = $this->model_catalog_product->getProducts(array('filter_manufacturer_id' => $manufacturer['manufacturer_id']));
-
-				foreach ($products as $product) {
-					$output .= '<url>';
-					$output .= '  <loc>' . $this->url->link('product/product', 'manufacturer_id=' . $manufacturer['manufacturer_id'] . '&product_id=' . $product['product_id']) . '</loc>';
-					$output .= '  <changefreq>weekly</changefreq>';
-					$output .= '  <priority>1.0</priority>';
-					$output .= '</url>';
-				}
-			}
 
 			$this->load->model('catalog/information');
 

@@ -10,6 +10,11 @@ class ControllerStartupSeoUrl extends Controller {
 		if (isset($this->request->get['_route_'])) {
 			$parts = explode('/', $this->request->get['_route_']);
 
+            //LANGPARAM 3 first check if it is ru-ru or ua-uk and only after unset!!!
+            if ($parts[0] == 'ru' || $parts[0] == 'ua') {
+                unset($parts[0]);
+            }
+
 			// remove any empty arrays from trailing
 			if (utf8_strlen(end($parts)) == 0) {
 				array_pop($parts);
@@ -65,7 +70,7 @@ class ControllerStartupSeoUrl extends Controller {
 		}
 	}
 
-	public function rewrite($link) {
+	public function rewrite($link, $forceLang = null) {
 		$url_info = parse_url(str_replace('&amp;', '&', $link));
 
 		$url = '';
@@ -77,18 +82,55 @@ class ControllerStartupSeoUrl extends Controller {
 		foreach ($data as $key => $value) {
 			if (isset($data['route'])) {
 				if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'information/information' && $key == 'information_id')) {
-					$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+				    
+                    $language_id = (int)$this->config->get('config_language_id'); //default/current
+                    
+                    //LANGPARAM 2.2
+                    if ($forceLang != null) {
+                        
+                        //echo "<pre>";
+                        if (isset($this->request->get['_route_'])) {
+                            $parts = explode('/', $this->request->get['_route_']);
+                            
+                            if ($forceLang == 'ru' && $parts[0] == 'ua') {
+                                $language_id = 2;
+                            }
+                            if ($forceLang == 'ua' && $parts[0] == 'ru') {
+                                $language_id = 3;
+                            }
+                        }
+                        //echo "</pre>";
+                    }
+                    
+                    $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . $language_id . "'");
+					
 
 					if ($query->num_rows && $query->row['keyword']) {
 						$url .= '/' . $query->row['keyword'];
 
-						unset($data[$key]);
+                        unset($data[$key]);
 					}
 				} elseif ($key == 'path') {
 					$categories = explode('_', $value);
+                    
+                    //LANGPARAM 2.2
+                    $language_id = (int)$this->config->get('config_language_id'); //default/current
+                    
+                    if ($forceLang != null) {
+                        if (isset($this->request->get['_route_'])) {
+                            $parts = explode('/', $this->request->get['_route_']);
+                            
+                            if ($forceLang == 'ru' && $parts[0] == 'ua') {
+                                $language_id = 2;
+                            }
+                            if ($forceLang == 'ua' && $parts[0] == 'ru') {
+                                $language_id = 3;
+                            }
+                        }
+                    }
 
 					foreach ($categories as $category) {
-						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = 'category_id=" . (int)$category . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = 'category_id=" . (int)$category . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . $language_id . "'");
 
 						if ($query->num_rows && $query->row['keyword']) {
 							$url .= '/' . $query->row['keyword'];
@@ -105,7 +147,26 @@ class ControllerStartupSeoUrl extends Controller {
 		}
 
 		if ($url) {
-			unset($data['route']);
+		   //LANGPARAM 2.1
+           if ($forceLang != null) {
+               if (isset($this->request->get['_route_'])) {
+                   $parts = explode('/', $this->request->get['_route_']);
+               
+                   if ($forceLang == 'ru' && $parts[0] == 'ua') {
+                       $url = '/' . 'ru' . $url;
+                   }
+                   if ($forceLang == 'ua' && $parts[0] == 'ru') {
+                       $url = '/' . 'ua' . $url;
+                   }
+                   if ($forceLang == $parts[0]) {
+                       $url = '/' . $forceLang . $url;
+                   }
+               }
+           } else {
+                $url = '/' . $this->session->data['language'] . $url;
+           }
+               
+            unset($data['route']);
 
 			$query = '';
 
@@ -119,8 +180,24 @@ class ControllerStartupSeoUrl extends Controller {
 				}
 			}
 
-			return $url_info['scheme'] . '://' . $url_info['host'] . (isset($url_info['port']) ? ':' . $url_info['port'] : '') . str_replace('/index.php', '', $url_info['path']) . $url . $query;
+            $link = $url_info['scheme'] . '://' . $url_info['host'] . (isset($url_info['port']) ? ':' . $url_info['port'] : '') . str_replace('/index.php', '', $url_info['path']) . $url . $query;
+
+			return $link;
 		} else {
+            //LANGPARAM 2.2
+            if ($forceLang != null) {
+                if ($forceLang == 'ru' && strpos($link, 'lang=ua') > 0) {
+                    $link = str_replace('lang=ua', 'lang=ru', $link);
+                } 
+                if ($forceLang == 'ua' && strpos($link, 'lang=ru') > 0) {
+                    $link = str_replace('lang=ru', 'lang=ua', $link);
+                }
+            } else {
+                if (strpos($link, 'lang=') === false) {
+                    $link .= '&amp;lang='.$this->session->data['language'];
+                }
+            }
+
 			return $link;
 		}
 	}

@@ -65,7 +65,9 @@ class File {
 		if ($files) {
 			foreach ($files as $file) {
 				if (file_exists($file)) {
-					unlink($file);
+                    //unlink($file);
+                    @chmod($file, 0777);
+                    @unlink($file);
 				}
 			}
 		}
