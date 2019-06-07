@@ -2,13 +2,18 @@
 class ControllerExtensionFeedGoogleSitemap extends Controller {
 	public function index() {
 		if ($this->config->get('feed_google_sitemap_status')) {
-
-            if (isset($_GET['lang']) && !empty($_GET['lang']) && $_GET['lang'] == 'ru-ru') {
+            if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'ru' || $_GET['lang'] == '2')) {
                 $this->config->set('config_language_id', '2');
-            } else if (isset($_GET['lang']) && !empty($_GET['lang']) && $_GET['lang'] == 'ua-uk') {
+                $this->session->data['language'] = 'ru';
+                $forceLang = 'ru';
+            } else if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'ua' || $_GET['lang'] == '3')) {
                 $this->config->set('config_language_id', '3');
+                $this->session->data['language'] = 'ua';
+                $forceLang = 'ua';
             } else {
                 $this->config->set('config_language_id', '3');
+                $this->session->data['language'] = 'ua';
+                $forceLang = 'ua';
             }
 
 			$output  = '<?xml version="1.0" encoding="UTF-8"?>';

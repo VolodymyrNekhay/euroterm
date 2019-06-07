@@ -11,7 +11,7 @@ class ControllerStartupSeoUrl extends Controller {
 			$parts = explode('/', $this->request->get['_route_']);
 
             //LANGPARAM 3 first check if it is ru-ru or ua-uk and only after unset!!!
-            if ($parts[0] == 'ru-ru' || $parts[0] == 'ua-uk') {
+            if ($parts[0] == 'ru' || $parts[0] == 'ua') {
                 unset($parts[0]);
             }
 
@@ -92,10 +92,10 @@ class ControllerStartupSeoUrl extends Controller {
                         if (isset($this->request->get['_route_'])) {
                             $parts = explode('/', $this->request->get['_route_']);
                             
-                            if ($forceLang == 'ru-ru' && $parts[0] == 'ua-uk') {
+                            if ($forceLang == 'ru' && $parts[0] == 'ua') {
                                 $language_id = 2;
                             }
-                            if ($forceLang == 'ua-uk' && $parts[0] == 'ru-ru') {
+                            if ($forceLang == 'ua' && $parts[0] == 'ru') {
                                 $language_id = 3;
                             }
                         }
@@ -120,10 +120,10 @@ class ControllerStartupSeoUrl extends Controller {
                         if (isset($this->request->get['_route_'])) {
                             $parts = explode('/', $this->request->get['_route_']);
                             
-                            if ($forceLang == 'ru-ru' && $parts[0] == 'ua-uk') {
+                            if ($forceLang == 'ru' && $parts[0] == 'ua') {
                                 $language_id = 2;
                             }
-                            if ($forceLang == 'ua-uk' && $parts[0] == 'ru-ru') {
+                            if ($forceLang == 'ua' && $parts[0] == 'ru') {
                                 $language_id = 3;
                             }
                         }
@@ -152,11 +152,11 @@ class ControllerStartupSeoUrl extends Controller {
                if (isset($this->request->get['_route_'])) {
                    $parts = explode('/', $this->request->get['_route_']);
                
-                   if ($forceLang == 'ru-ru' && $parts[0] == 'ua-uk') {
-                       $url = '/' . 'ru-ru' . $url;
+                   if ($forceLang == 'ru' && $parts[0] == 'ua') {
+                       $url = '/' . 'ru' . $url;
                    }
-                   if ($forceLang == 'ua-uk' && $parts[0] == 'ru-ru') {
-                       $url = '/' . 'ua-uk' . $url;
+                   if ($forceLang == 'ua' && $parts[0] == 'ru') {
+                       $url = '/' . 'ua' . $url;
                    }
                    if ($forceLang == $parts[0]) {
                        $url = '/' . $forceLang . $url;
@@ -186,11 +186,11 @@ class ControllerStartupSeoUrl extends Controller {
 		} else {
             //LANGPARAM 2.2
             if ($forceLang != null) {
-                if ($forceLang == 'ru-ru' && strpos($link, 'lang=ua-uk') > 0) {
-                    $link = str_replace('lang=ua-uk', 'lang=ru-ru', $link);
-                }
-                if ($forceLang == 'ua-uk' && strpos($link, 'lang=ru-ru') > 0) {
-                    $link = str_replace('lang=ru-ru', 'lang=ua-uk', $link);
+                if ($forceLang == 'ru' && strpos($link, 'lang=ua') > 0) {
+                    $link = str_replace('lang=ua', 'lang=ru', $link);
+                } 
+                if ($forceLang == 'ua' && strpos($link, 'lang=ru') > 0) {
+                    $link = str_replace('lang=ru', 'lang=ua', $link);
                 }
             } else {
                 if (strpos($link, 'lang=') === false) {
